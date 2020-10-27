@@ -122,20 +122,74 @@ while counter < PLAYER_COUNT:
     print(f"t5 kills: {t5_kills}")
     data_dict["t5_kills"] = t5_kills
 
-    counter += 1
-    data.append(data_dict)
+    
     ##########################################
 
-detail_image = cv2.imread(f"7-detail.png")
+    detail_image = cv2.imread(f"{counter}-detail.png")
 
-name_image  = enhance_Image(detail_image[400:500, 815:1530])
-custom_config = r'-l eng+kor+jap --psm 6'
-name = pt.image_to_string(name_image, config=custom_config)
-print(name)
+    # Name (Does not work well with multiple languages, going to save the image itself)
+    name_image  = enhance_Image(detail_image[400:500, 815:1530])
+    custom_config = r'-l eng+kor+jap --psm 6'
+    name = pt.image_to_string(name_image, config=custom_config)
+    print(f"name: {name}")
+    data_dict["name"] = name
+    data_dict["name_image"] = name_image
 
+    # Power
+    power = ""
+    power_x = 2000
+    while not power.isdigit():
+        power = image_to_string(detail_image, 415, 485, 1710, power_x)
+        power = power.replace(",", "")
+        try:
+            int(power)
+        except:
+            power_x -= 2
+        if power_x < 1710:
+            break
 
-image  = enhance_Image(detail_image[400:500, 815:1530])
-cv2.imshow("image", image)
-cv2.waitKey(0)
+    print(f"power: {power}")
+    data_dict["power"] = power
+
+    # Dead
+    dead = ""
+    dead_x = 2400
+    while not dead.isdigit():
+        dead = image_to_string(detail_image, 1070, 1140, dead_x, 2740)
+        dead = dead.replace(",", "")
+        try:
+            int(dead)
+        except:
+            dead_x += 2
+        if dead_x > 2740:
+            break
+
+    print(f"dead: {dead}")
+    data_dict["dead"] = dead
+
+    # Resource Assistance
+    rss = ""
+    rss_x = 2375
+    while not rss.isdigit():
+        rss = image_to_string(detail_image, 1565, 1640, rss_x, 2740)
+        rss = rss.replace(",", "")
+        try:
+            int(rss)
+        except:
+            rss_x += 2
+        if rss_x > 2740:
+            break
+
+    print(f"rss: {rss}")
+    data_dict["rss"] = rss
+
+    counter += 1
+    data.append(data_dict)
+
+# write to xlsx
+
+# image  = enhance_Image(detail_image[1565:1640, 2375:2740])
+# cv2.imshow("image", image)
+# cv2.waitKey(0)
 
 
