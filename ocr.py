@@ -30,13 +30,13 @@ def image_to_string(input_image, y1, y2, x1, x2):
     # cv2.waitKey(0)
     return ocr_string
 
-PLAYER_COUNT = 3
+PLAYER_COUNT = 10
 counter = 1
 data = [] # array of dictionaries (data_dict)
-while counter < PLAYER_COUNT:
+while counter <= PLAYER_COUNT:
     data_dict = {}
 
-    kill_image = cv2.imread(f"{counter}-kills.png")
+    kill_image = cv2.imread(f"player images/{counter}-kills.png")
 
     # Player ID
     player_id_x = 1930
@@ -128,7 +128,7 @@ while counter < PLAYER_COUNT:
     
     ##########################################
 
-    detail_image = cv2.imread(f"{counter}-detail.png")
+    detail_image = cv2.imread(f"player images/{counter}-detail.png")
 
     # Name (Does not work well with multiple languages, going to save the image itself)
     name_image  = enhance_Image(detail_image[400:500, 815:1530])
