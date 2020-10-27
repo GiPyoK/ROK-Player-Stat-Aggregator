@@ -44,20 +44,30 @@ def enhance_Image(image):
     invert = 255 - opening
     return invert
 
+def image_to_string(input_image, y1, y2, x1, x2):
+    image  = enhance_Image(input_image[y1:y2, x1:x2])
+    ocr_string = pt.image_to_string(image)
+    ocr_string = ocr_string.strip()
+    return ocr_string
 
-kill_image = cv2.imread("4-kills.png")
+kill_image = cv2.imread("5-kills.png")
 
 # Player ID
-player_id_image = enhance_Image(kill_image[610:690, 1630:1835]) 
-player_id = pt.image_to_string(player_id_image)
-player_id = player_id.strip()
-# remove ')' from the end of the string
-try:
-    int(player_id[-1])
-except:
-    player_id = player_id[0:-1]
-print(player_id)
+player_id_x = 1830
+player_id = ""
+while not player_id.isdigit():
+    player_id = image_to_string(kill_image, 610, 690, 1630, player_id_x)
+    # remove ')' from the end of the string
+    try:
+        int(player_id[-1])
+    except:
+        player_id = player_id[0:-1]
 
+    player_id_x += 5
+
+print(player_id)
+# cv2.imshow("image", player_id_image)
+# cv2.waitKey(0)
 
 # Alliance
 alliance_image = enhance_Image(kill_image[888:970, 1333:1900])
