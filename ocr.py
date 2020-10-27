@@ -2,9 +2,12 @@ from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract as pt
 import cv2
 import xlsxwriter
+from datetime import datetime
+import os
 
-workbook = xlsxwriter.Workbook("Detailed Player info.xlsx")
-worksheet = workbook.add_worksheet()
+# Create folder names folder if not exists
+if not os.path.exists("names"):
+    os.makedirs("names")
 
 def enhance_Image(image):
     # Grayscale, Gaussian blur, Otsu's threshold
@@ -29,7 +32,7 @@ def image_to_string(input_image, y1, y2, x1, x2):
 
 PLAYER_COUNT = 3
 counter = 1
-data = []
+data = [] # array of dictionaries (data_dict)
 while counter < PLAYER_COUNT:
     data_dict = {}
 
@@ -134,7 +137,11 @@ while counter < PLAYER_COUNT:
     name = name.rstrip()
     print(f"name: {name}")
     data_dict["name"] = name
-    data_dict["name_image"] = name_image
+    # Save seperate name image to write to xlsx file
+    os.chdir("names")
+    cv2.imwrite(f"{counter}-name.png", name_image)
+    data_dict["name_image"] = f"{counter}-name.png"
+    os.chdir("..")
 
     # Power
     power = ""
@@ -188,17 +195,41 @@ while counter < PLAYER_COUNT:
     data.append(data_dict)
 
 # write to xlsx
+workbook = xlsxwriter.Workbook("Detailed Player info.xlsx")
+worksheet = workbook.add_worksheet()
+
 bold = workbook.add_format({"bold":True})
 
-worksheet.write("A1", "Name", bold)
-worksheet.write("B1", "UID", bold)
-worksheet.write("C1", "Alliance", bold)
-worksheet.write("D1", "Power", bold)
-worksheet.write("E1", "Total Kills", bold)
-worksheet.write("F1", "T4 Kills", bold)
-worksheet.write("G1", "T5 Kills", bold)
-worksheet.write("H1", "Dead", bold)
-worksheet.write("I1", "Rss Assist", bold)
+now = datetime.now()
+current_date_time = now.strftime("%d/%m/%Y %H:%M")
+
+worksheet.write("A1", "Created On:", bold)
+worksheet.write("B1", f"{current_date_time}", bold)
+
+worksheet.write("A2", "Name", bold)
+worksheet.write("B2", "UID", bold)
+worksheet.write("C2", "Alliance", bold)
+worksheet.write("D2", "Power", bold)
+worksheet.write("E2", "Total Kills", bold)
+worksheet.write("F2", "T4 Kills", bold)
+worksheet.write("G2", "T5 Kills", bold)
+worksheet.write("H2", "Dead", bold)
+worksheet.write("I2", "Rss Assist", bold)
+worksheet.write("J2", "Name Image", bold)
+
+row_num = 3
+for player_dict in data:
+    worksheet.write(f"A{row_num}", player_dict["name"])
+    worksheet.write(f"B{row_num}", player_dict["id"])
+    worksheet.write(f"C{row_num}", player_dict["alliance"])
+    worksheet.write(f"D{row_num}", player_dict["power"])
+    worksheet.write(f"E{row_num}", player_dict["total_kills"])
+    worksheet.write(f"F{row_num}", player_dict["t4_kills"])
+    worksheet.write(f"G{row_num}", player_dict["t5_kills"])
+    worksheet.write(f"H{row_num}", player_dict["dead"])
+    worksheet.write(f"I{row_num}", player_dict["rss"])
+    worksheet.insert_image(f"J{row_num}", "names/"+player_dict["name_image"], {"x_scale":0.2, "y_scale":0.2})
+    row_num += 1
 
 workbook.close()
 
