@@ -27,8 +27,8 @@ def image_to_string(input_image, y1, y2, x1, x2):
     # cv2.waitKey(0)
     return ocr_string
 
-PLAYER_COUNT = 100
-counter = 1000
+PLAYER_COUNT = 3
+counter = 1
 data = []
 while counter < PLAYER_COUNT:
     data_dict = {}
@@ -131,6 +131,7 @@ while counter < PLAYER_COUNT:
     name_image  = enhance_Image(detail_image[400:500, 815:1530])
     custom_config = r'-l eng+kor+jap --psm 6'
     name = pt.image_to_string(name_image, config=custom_config)
+    name = name.rstrip()
     print(f"name: {name}")
     data_dict["name"] = name
     data_dict["name_image"] = name_image
