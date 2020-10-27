@@ -1,7 +1,7 @@
 from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract as pt
 import cv2
-import xlswriter
+import xlsxwriter
 
 workbook = xlsxwriter.Workbook("Detailed Player info.xlsx")
 worksheet = workbook.add_worksheet()
@@ -123,11 +123,19 @@ while counter < PLAYER_COUNT:
     data_dict["t5_kills"] = t5_kills
 
     counter += 1
+    data.append(data_dict)
     ##########################################
 
-detail_image = cv2.imread(f"{counter}-detail.png")
-# image  = enhance_Image(detail_image[1290:1355, 2090:2340])
-# cv2.imshow("image", image)
-# cv2.waitKey(0)
+detail_image = cv2.imread(f"7-detail.png")
+
+name_image  = enhance_Image(detail_image[400:500, 815:1530])
+custom_config = r'-l eng+kor+jap --psm 6'
+name = pt.image_to_string(name_image, config=custom_config)
+print(name)
+
+
+image  = enhance_Image(detail_image[400:500, 815:1530])
+cv2.imshow("image", image)
+cv2.waitKey(0)
 
 
