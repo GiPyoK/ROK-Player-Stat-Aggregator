@@ -188,6 +188,19 @@ while counter < PLAYER_COUNT:
     data.append(data_dict)
 
 # write to xlsx
+bold = workbook.add_format({"bold":True})
+
+worksheet.write("A1", "Name", bold)
+worksheet.write("B1", "UID", bold)
+worksheet.write("C1", "Alliance", bold)
+worksheet.write("D1", "Power", bold)
+worksheet.write("E1", "Total Kills", bold)
+worksheet.write("F1", "T4 Kills", bold)
+worksheet.write("G1", "T5 Kills", bold)
+worksheet.write("H1", "Dead", bold)
+worksheet.write("I1", "Rss Assist", bold)
+
+workbook.close()
 
 # image  = enhance_Image(detail_image[1565:1640, 2375:2740])
 # cv2.imshow("image", image)
