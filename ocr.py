@@ -49,16 +49,21 @@ kill_image = cv2.imread("4-kills.png")
 
 # Player ID
 player_id_image = enhance_Image(kill_image[610:690, 1630:1835]) 
-player_id = pt.image_to_string(player_id_image) # TODO: remove ')' from the end of the string
+player_id = pt.image_to_string(player_id_image)
+player_id = player_id.strip()
+# remove ')' from the end of the string
+try:
+    int(player_id[-1])
+except:
+    player_id = player_id[0:-1]
 print(player_id)
-# cv2.imshow("image", player_id_image)
-# cv2.waitKey(0)
+
 
 # Alliance
 alliance_image = enhance_Image(kill_image[888:970, 1333:1900])
-alliance = pt.image_to_string(alliance_image)
+alliance = pt.image_to_string(alliance_image) #(HOF]Hall of Fame
 print(alliance)
 cv2.imshow("image", alliance_image)
-cv2.waitKey(0)
+# cv2.waitKey(0)
 
 
