@@ -1,13 +1,21 @@
 import pyautogui as pg
 import os
+import pyperclip
+
 
 if not os.path.exists("player images"):
     os.makedirs("player images")
 
 os.chdir("player images")
 
+
+clipboard_data = pyperclip.paste()
+print(clipboard_data)
+
+
+
 # Capture top 3
-count = 1
+count = 10
 y_position = 365
 pg.click(x=848, y=365, clicks=1, interval=0.8)
 while count < 3:
@@ -29,8 +37,8 @@ while count < 3:
     y_position += 100
 
 # Capture the rest
-UP_TO = 10
-count = 3
+UP_TO = 400
+count = 3000
 while count <= UP_TO:
     pg.click(x=848, y=595, clicks=1, interval=0.8) # move to governor and click
 

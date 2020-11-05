@@ -30,7 +30,7 @@ def image_to_string(input_image, y1, y2, x1, x2):
     # cv2.waitKey(0)
     return ocr_string
 
-PLAYER_COUNT = 10
+PLAYER_COUNT = 300
 counter = 1
 data = [] # array of dictionaries (data_dict)
 while counter <= PLAYER_COUNT:
@@ -52,7 +52,7 @@ while counter <= PLAYER_COUNT:
             player_id = player_id[0:-1]
 
         player_id_x -= 2
-        if player_id_x < 1630:
+        if player_id_x < 1640:
             break
 
     print(f"id: {player_id}")
@@ -86,7 +86,7 @@ while counter <= PLAYER_COUNT:
             int(total_kills)
         except:
             total_kills_x -= 2
-        if total_kills_x < 2185:
+        if total_kills_x < 2250:
             break
 
     print(f"total kills: {total_kills}")
@@ -103,7 +103,7 @@ while counter <= PLAYER_COUNT:
         except:
             t4_kills_x -= 2
         
-        if t4_kills_x < 2090:
+        if t4_kills_x < 2460:
             break
     print(f"t4 kills: {t4_kills}")
     data_dict["t4_kills"] = t4_kills
@@ -119,7 +119,7 @@ while counter <= PLAYER_COUNT:
         except:
             t5_kills_x -= 2
         
-        if t5_kills_x < 2090:
+        if t5_kills_x < 2150:
             break
         
     print(f"t5 kills: {t5_kills}")
@@ -153,7 +153,7 @@ while counter <= PLAYER_COUNT:
             int(power)
         except:
             power_x -= 2
-        if power_x < 1710:
+        if power_x < 1770:
             break
 
     print(f"power: {power}")
@@ -169,7 +169,7 @@ while counter <= PLAYER_COUNT:
             int(dead)
         except:
             dead_x += 2
-        if dead_x > 2740:
+        if dead_x > 2680:
             break
 
     print(f"dead: {dead}")
@@ -185,7 +185,7 @@ while counter <= PLAYER_COUNT:
             int(rss)
         except:
             rss_x += 2
-        if rss_x > 2740:
+        if rss_x > 2650:
             break
 
     print(f"rss: {rss}")
@@ -236,5 +236,6 @@ workbook.close()
 # image  = enhance_Image(detail_image[1565:1640, 2375:2740])
 # cv2.imshow("image", image)
 # cv2.waitKey(0)
+
 
 
