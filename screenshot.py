@@ -11,7 +11,7 @@ from openpyxl.styles import Font
 from openpyxl import load_workbook
 
 # Create header
-XLSX_NAME = "Detailed Player info test.xlsx"
+XLSX_NAME = "Detailed Player info before kvk.xlsx"
 WORKSHEET_NAME = "Player Info"
 
 workbook = Workbook()
@@ -56,24 +56,24 @@ def save_player_name(rank):
 def capture_screenshot(y_position, count):
     os.chdir("player images")
     
-    pg.click(x=848, y=y_position, clicks=1, interval=0.8)
+    pg.click(x=848, y=y_position, clicks=1, interval=2)
 
-    pg.click(x=1175, y=435, clicks=1, interval=0.8) # move to ? and click
+    pg.click(x=1175, y=435, clicks=1, interval=2) # move to ? and click
     pg.screenshot(f"{count}-kills.png")
 
-    pg.click(x=409, y=766, clicks=1, interval=0.8) # move to more info and click
+    pg.click(x=409, y=766, clicks=1, interval=2) # move to more info and click
     pg.screenshot(f"{count}-detail.png")
 
     os.chdir("..") # Move back to root folder
 
-    pg.click(x=397, y=225, clicks=1, interval=0.8) # copy player name to clipboard
+    pg.click(x=397, y=225, clicks=1, interval=2) # copy player name to clipboard
     save_player_name(count) # save player name to dictionary
 
-    pg.click(x=1464, y=116, clicks=1, interval=0.8) # move to X and click
+    pg.click(x=1464, y=116, clicks=1, interval=2) # move to X and click
   
-    pg.click(x=1432, y=168, clicks=1, interval=0.8) # move to X and click
+    pg.click(x=1432, y=168, clicks=1, interval=2) # move to X and click
 
-    pg.moveTo(848, y_position, 0.3) # move to the id
+    pg.moveTo(848, y_position, 2) # move to the id
 
 
 ############ Screenshot ############
@@ -145,7 +145,7 @@ def write_to_xlsx(rank, data):
 
 
 
-PLAYER_COUNT = 400
+PLAYER_COUNT = 300
 counter = 1
 # data = [] # array of dictionaries (data_dict)
 while counter <= PLAYER_COUNT:
