@@ -25,7 +25,7 @@ OCR is performed on above images, and useful data are exported in xlsx format.
 
 ## Dependencies
 
-* pyautogui: Controls the mouse to navigate through top 300 players' statistic pages
-* cv2: Enhances image for better OCR accuracy
-* pytesseract: Converts image to string data
-* openpyxl: Saves and formats the string data in xlsx format
+* PyAutoGUI - Controls the mouse to navigate through top 300 players' statistic pages
+* OpenCV - Enhances image for better OCR accuracy
+* PyTesseract - Converts image to string data
+* OpenPyXL - Saves and formats the string data in xlsx format
