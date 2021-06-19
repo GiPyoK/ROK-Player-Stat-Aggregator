@@ -4,7 +4,7 @@ This program automates the process collecting in-game statistics of top 300 play
 
 ## Description
 
-This program goes through top 300 players and take screenshots of their staticstics page. Then, OCR is performed on those screenshots and saves the data in a spread sheet. It saves hours of manual typing to just 30 minutes.
+This program goes through top 300 players and take screenshots of their statistics page. Then, OCR is performed on those screenshots and saves the data in a spread sheet. It saves hours of manual typing to just 30 minutes.
 
 ## Example Screenshots
 
