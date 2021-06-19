@@ -1,4 +1,4 @@
-# ROK-Player-Stat-Automation
+# ROK-Player-Stat-Aggregator
 
 This program automates the process collecting in-game statistics of top 300 players in the kingdom.
 
